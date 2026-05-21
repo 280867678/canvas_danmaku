@@ -39,8 +39,8 @@ final class SpecialDanmakuPainter extends BaseDanmakuPainter {
     // 透明度动画
     final color = item.alphaTween == null
         ? item.color
-        : item.color.withValues(
-            alpha: item.alphaTween!.transform(
+        : item.color.withOpacity(
+            item.alphaTween!.transform(
             elapsed / item.duration,
           ));
 
