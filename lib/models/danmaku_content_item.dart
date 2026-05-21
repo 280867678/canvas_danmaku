@@ -38,7 +38,7 @@ class DanmakuContentItem<T> {
 
   @override
   String toString() {
-    return '${objectRuntimeType(this, "DanmakuContentItem<?>")}(text="$text", color=0x${color.toARGB32().toRadixString(16)}, type=${type.name}${count != null ? ", count=$count" : ""}${selfSend ? ", selfSend" : ""}${isColorful ? ", colorful" : ""}${extra != null ? ". extra=$extra" : ""})';
+    return '${objectRuntimeType(this, "DanmakuContentItem<?>")}(text="$text", color=0x${color.value.toRadixString(16)}, type=${type.name}${count != null ? ", count=$count" : ""}${selfSend ? ", selfSend" : ""}${isColorful ? ", colorful" : ""}${extra != null ? ". extra=$extra" : ""})';
   }
 }
 
@@ -104,9 +104,9 @@ class SpecialDanmakuContentItem<T> extends DanmakuContentItem<T> {
     final endA = double.tryParse(alphaString[1]) ?? 1;
     Tween<double>? alphaTween;
     if (disableGradient || startA == endA) {
-      color = color.withValues(alpha: (startA + endA) / 2);
+      color = color.withOpacity( (startA + endA) / 2);
     } else {
-      color = color.withValues(alpha: startA);
+      color = color.withOpacity( startA);
       alphaTween = Tween(begin: startA, end: endA);
     }
     final duration = (_parseDouble(list[3]) * 1000).round();
